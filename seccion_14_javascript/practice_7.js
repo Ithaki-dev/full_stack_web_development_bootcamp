@@ -1,10 +1,14 @@
-// Make a fucntion to calculate the BMI (Body Mass Index) of a person
-function calculateBMI(weight, height) {
-    if (height <= 0) {
-        throw new Error("Height must be greater than zero.");
+// Make a function to calculate the BMI (Body Mass Index) of a person
+function bmiCalculator(weight, height) {
+    if (weight / (height * height) > 25) {
+        return "You are overweight.";
     }
-    return "The BMI is: " + (weight / (height * height));
+    else if (weight / (height * height) < 18.5) {
+        return "You are underweight.";
+    } else {
+        return "You have a normal weight.";
+    }
 }
 
 // Example usage:
-console.log(calculateBMI(70, 1.75));
+console.log(bmiCalculator(70, 1.75));
