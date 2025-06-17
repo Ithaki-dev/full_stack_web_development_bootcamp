@@ -5,6 +5,7 @@ const app = express();
 const port = 3000;
 
 app.use(morgan("dev"));
+app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
   const days = [
@@ -17,7 +18,7 @@ app.get("/", (req, res) => {
     "Saturday: Enjoy your day off!"
   ];
   const today = new Date().getDay();
-  res.send(`<h1>${days[today]}</h1>`);
+  res.render("index", { advice: days[today] });
 });
 
 app.listen(port, () => {
