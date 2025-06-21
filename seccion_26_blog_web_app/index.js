@@ -13,6 +13,10 @@ app.get("/", (req, res) => {
   res.render("index", { title: "Home" });
 });
 
+app.get("/add", (req, res) => {
+  res.render("add", { title: "Add Post" });
+});
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
