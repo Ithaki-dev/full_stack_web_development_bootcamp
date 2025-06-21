@@ -28,18 +28,14 @@
 
       <div class="container">
         <!-- Add Post Form -->
-        <form action="/post" method="POST" enctype="multipart/form-data">
+        <form action="/add" method="POST" >
           <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" id="title" name="title" required>
           </div>
           <div class="form-group">
-            <label for="description">Description</label>
-            <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
-          </div>
-          <div class="form-group">
-            <label for="image">Image</label>
-            <input type="file" class="form-control-file" id="image" name="image" accept="image/*" required>
+            <label for="content">Content</label>
+            <textarea class="form-control" id="content" name="content" rows="4" required></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Add Post</button>
         </form>
@@ -48,12 +44,7 @@
     </section>
     <br>
     <section id="testimonials" class="tm-section-pad-top">
-        <footer class="text-center small tm-footer">
-          <p class="mb-0">
-          Copyright &copy; 2020 Company Name 
-          . <a rel="nofollow" href="https://www.tooplate.com" title="HTML templates">Designed by TOOPLATE</a>
-          </p>
-        </footer>
+        <%- include('footer.ejs') -%>
     </section>
 
     
