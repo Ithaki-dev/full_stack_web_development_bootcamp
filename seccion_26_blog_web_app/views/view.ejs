@@ -26,37 +26,25 @@
 
     <section id="post" class="tm-section-pad-top">
 
-      <div class="container">
-        <!-- Add saved Post -->
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <% posts.forEach(post => { %>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg aria-label="Placeholder: Thumbnail" class="bd-placeholder-img card-img-top" height="225" preserveAspectRatio="xMidYMid slice" role="img" width="100%" xmlns="http://www.w3.org/2000/svg">
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c" data-darkreader-inline-fill="" style="--darkreader-inline-fill: var(--darkreader-background-55595c, #43484b);"></rect>
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em" data-darkreader-inline-fill="" style="--darkreader-inline-fill: var(--darkreader-text-eceeef, #dddad6);">Thumbnail</text>
-                </svg>
-                <div class="card-body">
-                  <h5 class="card-title"><%= post.title %></h5>
-                  <p class="card-text"><%= post.content %></p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='/view/<%= post.id %>'">View</button>                     
-                    </div>
-                    <small class="text-body-secondary"><%= post.date %></small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% }) %>
+      <div class="container" >
+        <!-- View Post -->
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="tm-section-title"><%= post.title %></h2>
+            <p class="tm-section-description"><%= post.content %></p>
+            <form action="/delete/<%= post.id %>" method="POST" style="display:inline;">
+              <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?');">Erase</button>
+            </form>
+            <a href="/edit/<%= post.id %>" class="btn btn-warning">Edit</a>
+          </div>
         </div>
+
       </div>
 
     </section>
     <br>
     <section id="testimonials" class="tm-section-pad-top">
-      <%- include('footer.ejs') -%>
+        <%- include('footer.ejs') -%>
     </section>
 
     
@@ -184,8 +172,6 @@
         });
 
         
-
-       
       });
     </script>
   </body>

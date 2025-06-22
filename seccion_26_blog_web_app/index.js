@@ -59,6 +59,48 @@ app.get("/add", (req, res) => {
   res.render("add", { title: "Add Post", posts });
 });
 
+app.get("/view/:id", (req, res) => {
+  const postId = parseInt(req.params.id);
+  const post = posts.find(p => p.id === postId);
+
+  if (post) {
+    res.render("view", { title: post.title, post });
+  } else {
+    res.status(404).send("Post not found");
+  }
+});
+
+app.post("/delete/:id", (req, res) => {
+  const postId = parseInt(req.params.id);
+  const index = posts.findIndex(p => p.id === postId);
+  if (index !== -1) {
+    posts.splice(index, 1);
+  }
+  res.redirect("/");
+});
+
+app.get("/edit/:id", (req, res) => {
+  const postId = parseInt(req.params.id);
+  const post = posts.find(p => p.id === postId);
+  if (post) {
+    res.render("edit", { title: "Edit Post", post });
+  } else {
+    res.status(404).send("Post not found");
+  }
+});
+
+app.post("/edit/:id", (req, res) => {
+  const postId = parseInt(req.params.id);
+  const { title, content } = req.body;
+  const post = posts.find(p => p.id === postId);
+  if (post) {
+    post.title = title;
+    post.content = content;
+    res.redirect("/view/" + postId);
+  } else {
+    res.status(404).send("Post not found");
+  }
+});
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
