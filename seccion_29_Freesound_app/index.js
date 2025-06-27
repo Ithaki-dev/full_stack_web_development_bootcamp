@@ -2,6 +2,7 @@ import express from 'express';
 import axios from 'axios';
 import bodyParser from "body-parser";
 import morgan from 'morgan';
+import WaveSurfer from 'wavesurfer.js'
 
 const app = express();
 const port = 3000;
