@@ -1,0 +1,282 @@
+/* ===== RETRO ARCADE THEME ===== */
+
+/* CSS Variables for retro colors */
+:root {
+    --neon-cyan: #00ffff;
+    --neon-pink: #ff00ff;
+    --neon-green: #00ff00;
+    --neon-yellow: #ffff00;
+    --retro-purple: #8b00ff;
+    --dark-bg: #0a0a0a;
+    --card-bg: #1a1a2e;
+    --button-bg: #16213e;
+}
+
+/* Body and general styling */
+.retro-body {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    min-height: 100vh;
+    font-family: 'Orbitron', monospace;
+    color: var(--neon-cyan);
+    background-attachment: fixed;
+}
+
+/* Main title with neon glow effect */
+.retro-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.5rem;
+    color: var(--neon-cyan);
+    text-shadow: 
+        0 0 5px var(--neon-cyan),
+        0 0 10px var(--neon-cyan),
+        0 0 15px var(--neon-cyan),
+        0 0 20px var(--neon-cyan);
+    animation: glow 2s ease-in-out infinite alternate;
+    letter-spacing: 3px;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 5px var(--neon-cyan), 0 0 10px var(--neon-cyan), 0 0 15px var(--neon-cyan); }
+    to { text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan), 0 0 30px var(--neon-cyan); }
+}
+
+/* Search section */
+.retro-search {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.retro-input {
+    background: rgba(26, 26, 46, 0.8) !important;
+    border: 2px solid var(--neon-cyan) !important;
+    color: var(--neon-cyan) !important;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 16px;
+    padding: 15px !important;
+}
+
+.retro-input::placeholder {
+    color: rgba(0, 255, 255, 0.6) !important;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.retro-input:focus {
+    box-shadow: 0 0 15px var(--neon-cyan) !important;
+    border-color: var(--neon-pink) !important;
+}
+
+.retro-btn {
+    background: linear-gradient(45deg, var(--retro-purple), var(--neon-pink)) !important;
+    border: 2px solid var(--neon-pink) !important;
+    color: white !important;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    padding: 15px 25px !important;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+}
+
+.retro-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--neon-pink);
+    background: linear-gradient(45deg, var(--neon-pink), var(--retro-purple)) !important;
+}
+
+/* Subtitle styling */
+.retro-subtitle {
+    font-family: 'Press Start 2P', cursive;
+    color: var(--neon-pink);
+    text-shadow: 0 0 10px var(--neon-pink);
+    text-align: center;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+}
+
+/* Card styling */
+.retro-card {
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.9), rgba(22, 33, 62, 0.9)) !important;
+    border: 2px solid var(--neon-cyan) !important;
+    border-radius: 15px !important;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.retro-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 10px 30px rgba(0, 255, 255, 0.4),
+        0 0 30px rgba(255, 0, 255, 0.2);
+    border-color: var(--neon-pink);
+}
+
+.retro-sound-title {
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    color: var(--neon-yellow);
+    text-shadow: 0 0 8px var(--neon-yellow);
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.retro-user {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--neon-green) !important;
+    text-shadow: 0 0 5px var(--neon-green);
+    font-size: 0.9rem;
+}
+
+/* Waveform container */
+.waveform-container {
+    border: 2px solid var(--neon-cyan) !important;
+    border-radius: 12px !important;
+    padding: 15px !important;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(26, 26, 46, 0.6)) !important;
+    box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.1);
+    min-height: 100px;
+}
+
+/* Button styles */
+.retro-play-btn {
+    background: linear-gradient(45deg, var(--neon-green), #00cc00) !important;
+    border: 2px solid var(--neon-green) !important;
+    color: black !important;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px !important;
+    padding: 8px 15px !important;
+    text-shadow: none;
+    font-weight: bold;
+}
+
+.retro-play-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px var(--neon-green);
+}
+
+.retro-stop-btn {
+    background: linear-gradient(45deg, #ff4444, #cc0000) !important;
+    border: 2px solid #ff4444 !important;
+    color: white !important;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px !important;
+    padding: 8px 15px !important;
+    text-shadow: none;
+}
+
+.retro-stop-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #ff4444;
+}
+
+.retro-download-btn {
+    background: linear-gradient(45deg, var(--neon-yellow), #ffcc00) !important;
+    border: 2px solid var(--neon-yellow) !important;
+    color: black !important;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px !important;
+    padding: 8px 15px !important;
+    text-shadow: none;
+    font-weight: bold;
+}
+
+.retro-download-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px var(--neon-yellow);
+    background: linear-gradient(45deg, #ffcc00, var(--neon-yellow)) !important;
+}
+
+.retro-download-btn:active {
+    transform: scale(0.95);
+}
+
+.retro-time {
+    font-family: 'Share Tech Mono', monospace !important;
+    font-size: 16px !important;
+    color: var(--neon-yellow) !important;
+    text-shadow: 0 0 5px var(--neon-yellow);
+    align-self: center;
+    font-weight: bold;
+}
+
+/* No results message */
+.retro-no-results {
+    font-family: 'Press Start 2P', cursive;
+    color: #ff4444;
+    text-shadow: 0 0 10px #ff4444;
+    font-size: 1.2rem;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.3; }
+}
+
+/* Loading state for waveforms */
+.waveform-container:empty::after {
+    content: "⚡ LOADING WAVEFORM ⚡";
+    display: block;
+    text-align: center;
+    color: var(--neon-cyan);
+    padding: 30px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .retro-title {
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+    }
+    
+    .retro-subtitle {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+    
+    .retro-sound-title {
+        font-size: 1rem;
+    }
+    
+    .d-flex.gap-2 {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .retro-play-btn, .retro-stop-btn, .retro-download-btn {
+        font-size: 8px !important;
+        padding: 6px 12px !important;
+    }
+    
+    .retro-time {
+        font-size: 14px !important;
+    }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, var(--neon-cyan), var(--neon-pink));
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, var(--neon-pink), var(--neon-cyan));
+}
