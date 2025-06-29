@@ -10,15 +10,40 @@
     --dark-bg: #0a0a0a;
     --card-bg: #1a1a2e;
     --button-bg: #16213e;
+    --retro-white: #ffffff;
+}
+
+/* Reset default margins and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* HTML and Body full coverage */
+html, body {
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%) !important;
+}
+
+/* Override Bootstrap container margins */
+.container, .container-fluid {
+    margin-top: 0 !important;
+    padding-top: 20px !important;
 }
 
 /* Body and general styling */
 .retro-body {
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
     min-height: 100vh;
+    height: 100%;
     font-family: 'Orbitron', monospace;
     color: var(--neon-cyan);
     background-attachment: fixed;
+    margin: 0;
+    padding: 0;
 }
 
 /* Main title with neon glow effect */
@@ -117,7 +142,7 @@
     font-family: 'Orbitron', monospace;
     font-weight: 700;
     color: var(--neon-yellow);
-    text-shadow: 0 0 8px var(--neon-yellow);
+    /* text-shadow: 0 0 8px var(--neon-yellow); */
     font-size: 1.2rem;
     letter-spacing: 1px;
 }
@@ -125,7 +150,7 @@
 .retro-user {
     font-family: 'Share Tech Mono', monospace;
     color: var(--neon-green) !important;
-    text-shadow: 0 0 5px var(--neon-green);
+    /* text-shadow: 0 0 5px var(--neon-green); */
     font-size: 0.9rem;
 }
 
@@ -141,10 +166,10 @@
 
 /* Button styles */
 .retro-play-btn {
-    background: linear-gradient(45deg, var(--neon-green), #00cc00) !important;
-    border: 2px solid var(--neon-green) !important;
-    color: black !important;
-    font-family: 'Press Start 2P', cursive;
+    background: rgba(26, 26, 46, 0.8) !important;
+    border: 2px solid var(--neon-cyan) !important;
+    color: white !important;
+    font-family: 'Orbitron', monospace;
     font-size: 10px !important;
     padding: 8px 15px !important;
     text-shadow: none;
@@ -153,14 +178,15 @@
 
 .retro-play-btn:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 15px var(--neon-green);
+    box-shadow: 0 0 15px var(--neon-cyan);
+    background: rgba(0, 255, 255, 0.1) !important;
 }
 
 .retro-stop-btn {
-    background: linear-gradient(45deg, #ff4444, #cc0000) !important;
-    border: 2px solid #ff4444 !important;
+    background: rgba(26, 26, 46, 0.8) !important;
+    border: 2px solid var(--neon-cyan) !important;
     color: white !important;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Orbitron', monospace;
     font-size: 10px !important;
     padding: 8px 15px !important;
     text-shadow: none;
@@ -168,14 +194,15 @@
 
 .retro-stop-btn:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 15px #ff4444;
+    box-shadow: 0 0 15px var(--neon-cyan);
+    background: rgba(0, 255, 255, 0.1) !important;
 }
 
 .retro-download-btn {
-    background: linear-gradient(45deg, var(--neon-yellow), #ffcc00) !important;
-    border: 2px solid var(--neon-yellow) !important;
-    color: black !important;
-    font-family: 'Press Start 2P', cursive;
+    background: rgba(26, 26, 46, 0.8) !important;
+    border: 2px solid var(--neon-cyan) !important;
+    color: white !important;
+    font-family: 'Orbitron', monospace;
     font-size: 10px !important;
     padding: 8px 15px !important;
     text-shadow: none;
@@ -184,8 +211,8 @@
 
 .retro-download-btn:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 15px var(--neon-yellow);
-    background: linear-gradient(45deg, #ffcc00, var(--neon-yellow)) !important;
+    box-shadow: 0 0 15px var(--neon-cyan);
+    background: rgba(0, 255, 255, 0.1) !important;
 }
 
 .retro-download-btn:active {
@@ -196,7 +223,7 @@
     font-family: 'Share Tech Mono', monospace !important;
     font-size: 16px !important;
     color: var(--neon-yellow) !important;
-    text-shadow: 0 0 5px var(--neon-yellow);
+    /* text-shadow: 0 0 5px var(--neon-yellow); */
     align-self: center;
     font-weight: bold;
 }

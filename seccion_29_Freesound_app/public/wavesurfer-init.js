@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             // Change button state to show downloading
             const originalText = button.innerHTML;
-            button.innerHTML = '⬇️ DOWNLOADING...';
+            button.innerHTML = '⬇ DOWNLOADING...';
             button.disabled = true;
             
             // Fetch the audio file
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.removeChild(a);
             
             // Reset button
-            button.innerHTML = '✅ DOWNLOADED!';
+            button.innerHTML = '✓ DOWNLOADED';
             setTimeout(() => {
                 button.innerHTML = originalText;
                 button.disabled = false;
@@ -164,9 +164,9 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Download failed:', error);
             
             // Show error state
-            button.innerHTML = '❌ FAILED';
+            button.innerHTML = '✗ FAILED';
             setTimeout(() => {
-                button.innerHTML = '💾 DOWNLOAD';
+                button.innerHTML = '⬇ DOWNLOAD';
                 button.disabled = false;
             }, 2000);
         }
