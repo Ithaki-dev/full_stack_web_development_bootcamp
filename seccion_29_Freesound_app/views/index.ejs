@@ -12,17 +12,19 @@
     <!-- Custom CSS AFTER Bootstrap to override -->
     <link rel="stylesheet" href="/styles.css">
 </head>
-<body class="retro-body">
-    <div class="container" style="padding-top: 20px;">
-        <h1 id="main-title" class="text-center mb-4 retro-title">SAMPLE FINDER</h1>
+<body class="retro-body <%= (results.length > 0 || query) ? 'has-results' : 'no-results' %>">
+    <div class="container main-container">
+        <div class="search-section">
+            <h1 id="main-title" class="text-center mb-4 retro-title">SAMPLE FINDER</h1>
 
-        <!-- Barra de búsqueda centrada -->
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-10">
-                <form method="get" action="/" class="input-group retro-search">
-                    <input type="text" name="q" value="<%= query || '' %>" class="form-control retro-input" placeholder="🔍 Search samples...">
-                    <button type="submit" class="btn retro-btn">SEARCH</button>
-                </form>
+            <!-- Barra de búsqueda centrada -->
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <form method="get" action="/" class="input-group retro-search">
+                        <input type="text" name="q" value="<%= query || '' %>" class="form-control retro-input" placeholder="🔍 Search samples...">
+                        <button type="submit" class="btn retro-btn">SEARCH</button>
+                    </form>
+                </div>
             </div>
         </div>
 

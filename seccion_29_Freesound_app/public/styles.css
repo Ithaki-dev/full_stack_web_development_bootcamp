@@ -38,12 +38,54 @@ html, body {
 .retro-body {
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
     min-height: 100vh;
-    height: 100%;
     font-family: 'Orbitron', monospace;
     color: var(--neon-cyan);
     background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100% 100%; /* This stretches the background to cover entire viewport */
     margin: 0;
     padding: 0;
+}
+
+.retro-body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    z-index: -1;
+}
+
+/* Default state: center everything */
+.retro-body.no-results {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.retro-body.no-results .main-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+}
+
+/* After search: normal layout */
+.retro-body.has-results {
+    padding-top: 20px;
+}
+
+.retro-body.has-results .main-container {
+    padding-top: 20px;
+}
+
+/* Transition effect for smooth movement */
+.search-section {
+    transition: all 0.3s ease-in-out;
 }
 
 /* Main title with neon glow effect */
