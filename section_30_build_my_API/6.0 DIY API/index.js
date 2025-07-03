@@ -80,18 +80,22 @@ app.patch("/joke/:id", (req, res) => {
 app.delete("/joke/:id", (req, res) => {
   const jokeId = parseInt(req.params.id, 10);
   const jokeIndex = jokes.findIndex((j) => j.id === jokeId);
-  if (jokeIndex !== -1) {
+  if (jokeIndex !== -1 && req.headers["x-master-key"] === masterKey) {
     jokes.splice(jokeIndex, 1);
     res.status(204).send();
   } else {
-    res.status(404).json({ error: "Joke not found" });
+    res.status(404).json({ error: "You are not authorized to delete this joke." });
   }
 });
 
 //8. DELETE All jokes
 app.delete("/jokes", (req, res) => {
-  jokes = [];
-  res.status(204).send();
+  if (req.headers["x-master-key"] === masterKey) {
+    jokes = [];
+    res.status(204).send();
+  } else {
+    res.status(403).json({ error: "You are not authorized to delete all jokes." });
+  }
 });
 
 app.listen(port, () => {
