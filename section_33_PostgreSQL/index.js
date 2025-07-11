@@ -1,14 +1,49 @@
 import express from "express";
 import bodyParser from "body-parser";
+import pg from "pg";
 
 const app = express();
 const port = 3000;
+
+const db = new pg.Client({
+  user: "postgres",
+  host: "localhost",
+  database: "World",
+  password: "c0n547udr7", // replace with your actual password
+  port: 5432,
+});
+
+db.connect((err) => {
+  if (err) {
+    console.error("Connection error", err.stack);
+  } else {
+    console.log("Connected to the database");
+  }
+});
 
 let totalCorrect = 0;
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+
+let quiz = [
+  { country: "France", capital: "Paris" },
+  { country: "Germany", capital: "Berlin" },
+  { country: "Italy", capital: "Rome" }
+];
+
+db.query("SELECT * FROM capitals", (err, res) => {
+  if (err) {
+    console.error("Error fetching data from database", err.stack);
+  } else {
+    quiz = res.rows.map(row => ({
+      country: row.country,
+      capital: row.capital
+    }));
+    console.log("Quiz data loaded from database");
+  }
+});
 
 let currentQuestion = {};
 
