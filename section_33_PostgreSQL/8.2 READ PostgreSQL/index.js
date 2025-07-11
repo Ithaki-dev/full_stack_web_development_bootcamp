@@ -27,19 +27,15 @@ let totalCorrect = 0;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-let quiz = [
-  { country: "France", capital: "Paris" },
-  { country: "Germany", capital: "Berlin" },
-  { country: "Italy", capital: "Rome" }
-];
+let quiz = [];
 
-db.query("SELECT * FROM capitals", (err, res) => {
+db.query("SELECT * FROM flags", (err, res) => {
   if (err) {
     console.error("Error fetching data from database", err.stack);
   } else {
     quiz = res.rows.map(row => ({
       country: row.country,
-      capital: row.capital
+      flags: row.flags
     }));
     console.log("Quiz data loaded from database");
   }
