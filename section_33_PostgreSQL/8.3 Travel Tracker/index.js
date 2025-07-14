@@ -30,12 +30,26 @@ db.connect(
 
 app.use(express.static("public"));
 
+// Function to check if a country is already visited
+async function isCountryVisited(countryCode) {
+  try {
+    const result = await db.query("SELECT * FROM visited_countries WHERE country_code = $1", [countryCode]);
+    return result.rows.length > 0;
+  } catch (err) {
+    console.error("Error checking if country is visited:", err);
+    return false;
+  }
+}
+
+
 app.get("/", async (req, res) => {
   try {
     const result = await db.query("SELECT country_code FROM visited_countries");
     const totalCountries = result.rows.length;
     console.log(result.rows.map(row => row.country_code));
-    res.render("index", { countries: result.rows.map(row => row.country_code), total: totalCountries });
+    res.render("index", { countries: result.rows.map(row => row.country_code), total: totalCountries,
+      message: 'Welcome to the Travel Tracker! Add a country to start tracking your travels.'
+     });
   } catch (err) {
     console.error(err);
     res.status(500).send("Error retrieving countries");
@@ -46,23 +60,29 @@ app.get("/", async (req, res) => {
 app.post("/add", async (req, res) => {
   const country = req.body.country.trim();
   if (!country) {
-    return res.status(400).send("Country name cannot be empty");
+    return res.redirect('/', { message: 'Please enter a country name.' });
   }
   
   // Capitalize first letter
   const capitalizedCountry = country.charAt(0).toUpperCase() + country.slice(1).toLowerCase();
-  
   try {
     // Search the code for the country
     const result = await db.query("SELECT country_code FROM countries WHERE country_name = $1", [capitalizedCountry]);
     if (result.rows.length === 0) {
+      
       return res.status(404).send("Country not found");
     }
     const countryCode = result.rows[0].country_code;
-    // Insert the country code into visited_countries
-    await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [countryCode]);
-    console.log(`Added country: ${countryCode}`);
-    res.redirect("/");
+
+    // Check if the country is already visited
+    if (await isCountryVisited(countryCode)) {
+      return res.status(400).send("Country already visited");
+    }else {
+      // Insert the country code into visited_countries
+      await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [countryCode]);
+      console.log(`Added country: ${countryCode}`);
+      res.redirect("/");
+    }
   } catch (err) {
     console.error(err);
     res.status(500).send("Error adding country");
