@@ -59,8 +59,16 @@ app.get("/", async (req, res) => {
 
 app.post("/add", async (req, res) => {
   const country = req.body.country.trim();
+  // Get current countries for re-rendering
+  const currentCountries = await db.query("SELECT country_code FROM visited_countries");
+  const totalCountries = currentCountries.rows.length;
+  // Check if country is empty
   if (!country) {
-    return res.redirect('/', { message: 'Please enter a country name.' });
+    return res.render("index", {
+      countries: currentCountries.rows.map(row => row.country_code),
+      total: totalCountries,
+      message: 'Country name cannot be empty'
+    });
   }
   
   // Capitalize first letter
@@ -69,15 +77,23 @@ app.post("/add", async (req, res) => {
     // Search the code for the country
     const result = await db.query("SELECT country_code FROM countries WHERE country_name = $1", [capitalizedCountry]);
     if (result.rows.length === 0) {
-      
-      return res.status(404).send("Country not found");
+      return res.render("index", {
+        countries: currentCountries.rows.map(row => row.country_code),
+        total: totalCountries,
+        message: 'Country not found'
+      });
     }
     const countryCode = result.rows[0].country_code;
 
     // Check if the country is already visited
     if (await isCountryVisited(countryCode)) {
-      return res.status(400).send("Country already visited");
-    }else {
+      return res.render("index", {
+        countries: currentCountries.rows.map(row => row.country_code),
+        total: totalCountries,
+        message: 'Welcome to the Travel Tracker! Add a country to start tracking your travels.',
+        error: "Country already visited"
+      });
+    } else {
       // Insert the country code into visited_countries
       await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [countryCode]);
       console.log(`Added country: ${countryCode}`);
