@@ -75,7 +75,7 @@ app.post("/add", async (req, res) => {
   const capitalizedCountry = country.charAt(0).toUpperCase() + country.slice(1).toLowerCase();
   try {
     // Search the code for the country
-    const result = await db.query("SELECT country_code FROM countries WHERE country_name = $1", [capitalizedCountry]);
+    const result = await db.query("SELECT country_code FROM countries WHERE country_name LIKE '%' || $1 || '%'", [capitalizedCountry]);
     if (result.rows.length === 0) {
       return res.render("index", {
         countries: currentCountries.rows.map(row => row.country_code),
