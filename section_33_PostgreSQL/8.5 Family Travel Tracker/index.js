@@ -8,8 +8,8 @@ const port = 3000;
 const db = new pg.Client({
   user: "postgres",
   host: "localhost",
-  database: "World",
-  password: "c0n547udr7",
+  database: "world",
+  password: "postgres",
   port: 5432,
 });
 db.connect();
@@ -41,7 +41,7 @@ async function getCurrentUser() {
 }
 
 async function checkVisisted() {
-  const result = await db.query("SELECT country_code FROM visited_countries WHERE users_id = $1", [currentUserId]);
+  const result = await db.query("SELECT country_code FROM visited_countries WHERE user_id = $1", [currentUserId]);
   let countries = [];
   result.rows.forEach((country) => {
     countries.push(country.country_code);
