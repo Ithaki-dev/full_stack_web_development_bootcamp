@@ -142,7 +142,7 @@ app.post("/search", async (req, res) => {
 
   try {
     const results = await searchBooks(query);
-    res.render("index", { books: results });
+    res.render("search_book", { books: results });
   } catch (error) {
     console.error("Error searching books:", error);
     res.status(500).send("Error searching books");

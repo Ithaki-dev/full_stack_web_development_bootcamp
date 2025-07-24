@@ -11,15 +11,11 @@
     <%- include('header.ejs') %>
 
     <body>
-        <div class="container mt-5">
-            <h1>Book Notes</h1>
-            <p>Welcome to the Book Notes application. Here you can view and manage your book notes.</p>
-
-            <div class="container">
-                <% if (books.length > 0) { %>
-                    <div class="devices">
-                        <% books.forEach(book => { %>
-                            <div class="device-info">
+        <div class="container">
+            <% if (books.length > 0) { %>
+                <div class="devices">
+                    <% books.forEach(book => { %>
+                        <div class="device-info">
                                 <div class="row">
                                     <div class="col-sm-4 col-md-3">
                                         <img src="<%= book.cover %>" alt="Book Cover" class="album-cover">
@@ -32,6 +28,10 @@
                                         <div class="text-muted mb-0">
                                             <i class="bi bi-book me-2"></i><%= book.description %>
                                         </div>
+                                        <div class="mt-2">
+                                             <!--Add button -->
+                                             <a href="/add/<%= book.id %>" class="btn btn-primary">Add</a>  
+                                    </div>
                                 </div>
                             </div>
                         <% }); %>
@@ -40,11 +40,11 @@
                     <p>No books found.</p>
                 <% } %>
             </div>
-        </div>
+
         <!-- script -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
     </body>
 
     <%- include('footer.ejs') %>
-
+    
 </html>
