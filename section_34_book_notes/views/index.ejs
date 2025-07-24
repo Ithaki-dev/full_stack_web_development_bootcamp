@@ -14,51 +14,35 @@
         <div class="container mt-5">
             <h1>Book Notes</h1>
             <p>Welcome to the Book Notes application. Here you can view and manage your book notes.</p>
+
             <div class="container">
-                <div class="devices">
-                    <div class="device-info">
-                        <div class="row">
-                            <div class="col-sm-4 col-md-3">
-                                <img src="https://cdn-images.dzcdn.net/images/cover/2d4189af6ad51b92da0250ae7d040791/500x500-000000-80-0-0.jpg" alt="Album Cover" class="album-cover">
+                <% if (books.length > 0) { %>
+                    <div class="devices">
+                        <% books.forEach(book => { %>
+                            <div class="device-info">
+                                <div class="row">
+                                    <div class="col-sm-4 col-md-3">
+                                        <img src="<%= book.cover %>" alt="Book Cover" class="album-cover">
+                                    </div>
+                                    <div class="col-sm-8 col-md-9">
+                                        <div class="text-muted mt-2 mb-1">
+                                            <i class="bi bi-person me-2"></i><%= book.author %>
+                                        </div>
+                                        <div class="h5 mb-1"><%= book.title %></div>
+                                        <div class="text-muted mb-0">
+                                            <i class="bi bi-book me-2"></i><%= book.description %>
+                                        </div>
+                                        <div class="mt-2">
+                                             <!--Add button -->
+                                             <a href="/add/<%= book.id %>" class="btn btn-primary">Add</a>  
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-sm-8 col-md-9">
-                                <div class="text-muted mt-2 mb-1">
-                                    <i class="bi bi-person me-2"></i>Salon
-                                </div>
-                                <div class="h5 mb-1">Voodoo Child</div>
-                                <div class="text-muted mb-0">Alune Wade</div>
-                                <div class="text-muted mb-0">
-                                    <i class="bi bi-book me-2"></i>New African Orleans
-                                </div>
-                                <div class="text-muted mt-2">
-                                    <i class="bi bi-box-arrow-up-right me-2"></i>
-                                    <a href='#'>Open</a>
-                                </div>
-                            </div>
-                        </div>
+                        <% }); %>
                     </div>
-                    <div class="device-info">
-                        <div class="row">
-                            <div class="col-sm-4 col-md-3">
-                                <img src="https://cdn-images.dzcdn.net/images/cover/3bc12151f10cadd25839c75c449d988e/500x500-000000-80-0-0.jpg" alt="Album Cover" class="album-cover">
-                            </div>
-                            <div class="col-sm-8 col-md-9">
-                                <div class="text-muted mt-2 mb-1">
-                                    <i class="bi bi-speaker me-2"></i>Bureau
-                                </div>
-                                <div class="h5 mb-1">Teenage Dreams</div>
-                                <div class="text-muted mb-0">Kids Return</div>
-                                <div class="text-muted mb-0">
-                                    <i class="bi bi-disc-fill me-2"></i>1997
-                                </div>
-                                <div class="text-muted mt-2">
-                                    <i class="bi bi-box-arrow-up-right me-2"></i>
-                                    <a href='#'>Open</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <% } else { %>
+                    <p>No books found.</p>
+                <% } %>
             </div>
         </div>
         <!-- script -->
@@ -66,4 +50,5 @@
     </body>
 
     <%- include('footer.ejs') %>
+
 </html>

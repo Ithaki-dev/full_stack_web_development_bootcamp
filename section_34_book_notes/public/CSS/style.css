@@ -14,7 +14,7 @@
 
 .album-cover {
     width: 150px;
-    height: 150px;
+    height: 250px;
     margin-right: 1rem;
     object-fit: cover;
 }
