@@ -1,0 +1,20 @@
+.devices {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+.device-info {
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.album-cover {
+    width: 150px;
+    height: 150px;
+    margin-right: 1rem;
+    object-fit: cover;
+}
