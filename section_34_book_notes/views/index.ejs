@@ -10,11 +10,26 @@
 
     <%- include('header.ejs') %>
 
-    <body>
+    <body style="padding-top: 100px;">
         <div class="container mt-5">
-            <h1>Book Notes</h1>
-            <p>Welcome to the Book Notes application. Here you can view and manage your book notes.</p>
-
+            <div class="hero-section text-center mb-5 p-5 rounded" style="background: linear-gradient(135deg, #343a40 0%, #495057 100%); color: white;">
+                <h1 class="display-3 fw-bold mb-3">Book Notes</h1>
+                <p class="lead mb-4">Your personal digital library awaits</p>
+                <div class="row justify-content-center">
+                    <div class="col-auto">
+                        <div class="d-flex gap-4">
+                            <div class="text-center">
+                                <div class="h3 fw-bold"><%= books.length %></div>
+                                <small>Books</small>
+                            </div>
+                            <div class="text-center">
+                                <div class="h3 fw-bold">∞</div>
+                                <small>Memories</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="container">
                 <% if (books.length > 0) { %>
                     <div class="devices">
@@ -28,7 +43,9 @@
                                         <div class="text-muted mt-2 mb-1">
                                             <i class="bi bi-person me-2"></i><%= book.author %>
                                         </div>
-                                        <div class="h5 mb-1"><%= book.title %></div>
+                                        <i class="bi bi-pen"></i>
+                                        <a href="/edit/<%= book.id %>" class="h5 mb-1 text-decoration-none"><%= book.title %></a>
+                                        <!-- <div class="h5 mb-1"><%= book.title %></div> -->
                                         <div class="text-muted mb-0">
                                             <i class="bi bi-book me-2"></i><%= book.description %>
                                         </div>

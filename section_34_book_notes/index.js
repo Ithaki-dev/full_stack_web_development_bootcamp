@@ -149,14 +149,48 @@ app.post("/search", async (req, res) => {
   }
 });
 
+app.get("/edit/:id", (req, res) => {
+  const { id } = req.params;
+  console.log("Editing book with ID:", id);
+  db.query("SELECT * FROM books WHERE id = $1", [id], (err, result) => {
+    if (err) {
+      console.error("Error fetching book for edit:", err);
+      return res.status(500).send("Error fetching book for edit");
+    }
+    if (result.rows.length === 0) {
+      return res.status(404).send("Book not found");
+    }
+    const book = result.rows[0];
+    res.render("edit_book", { book });
+  });
+});
 
+app.post("/edit/:id", (req, res) => {
+  const { id } = req.params;
+  const { title, author, description, cover } = req.body;
+  const query = "UPDATE books SET title = $1, author = $2, description = $3, cover = $4 WHERE id = $5";
+  const values = [title, author, description, cover, id];
 
+  db.query(query, values, (err) => {
+    if (err) {
+      console.error("Error updating book:", err);
+      return res.status(500).send("Error updating book");
+    }
+    res.redirect("/");
+  });
+});
 
-
-
-
-
-
+app.post("/delete/:id", (req, res) => {
+  const { id } = req.params;
+  console.log("Deleting book with ID:", id);
+  db.query("DELETE FROM books WHERE id = $1", [id], (err) => {
+    if (err) {
+      console.error("Error deleting book:", err);
+      return res.status(500).send("Error deleting book");
+    }
+    res.redirect("/");
+  });
+});
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

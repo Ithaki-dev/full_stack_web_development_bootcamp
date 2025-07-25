@@ -1,33 +1,41 @@
-    <header class="p-3 text-bg-dark">
-        <div class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-                        <use xlink:href="#bootstrap"></use>
-                    </svg>
+    <header class="fixed-top shadow-lg" style="background: linear-gradient(135deg, #343a40 0%, #495057 100%); backdrop-filter: blur(10px);">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark py-3">
+            <div class="container-fluid">
+                <!-- Logo and Brand -->
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <img src="/img/small_logo_white.png" alt="Logo" height="40" class="me-2">
+                    <span class="fw-bold">Book Notes</span>
                 </a>
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li>
-                        <a href="/" class="nav-link px-2 text-secondary">My Library</a>
-                    </li>
-                    <!-- <li>
-                        <a href="/add" class="nav-link px-2 text-white">My books</a>
-                    </li> -->
-                    <!-- <li>
-                        <a href="#" class="nav-link px-2 text-white">Pricing</a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link px-2 text-white">FAQs</a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link px-2 text-white">About</a>
-                        </li> -->
-                        </ul>
-                        <div class="ms-auto d-flex align-items-center gap-2">
-                            <form class="mb-3 mb-lg-0 me-lg-3 d-flex align-items-center" action="/search" method="post">
-                                <input type="search" class="form-control form-control-dark text-bg-dark me-2" name="search" placeholder="Search..." aria-label="Search">
-                                <button type="submit" class="btn btn-warning">Search</button>
-                            </form>
-                        </div>    </div>
-        </div>
-    </header>
+
+                <!-- Mobile Toggle Button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Collapsible Content -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <!-- Navigation Links -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/">
+                                <i class="bi bi-house-door me-1"></i>My library
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- Search Form -->
+                    <form class="d-flex" action="/search" method="post" role="search">
+                        <input class="form-control me-2" type="search" name="search" 
+                               placeholder="Search books..." aria-label="Search" 
+                               style="min-width: 200px;">
+                        <button class="btn btn-warning" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>

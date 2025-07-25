@@ -16,14 +16,14 @@
                 <div class="col-lg-8">
                     <!-- Header -->
                     <div class="text-center mb-4">
-                        <h2 class="fw-bold">Add Book to Library</h2>
-                        <p class="text-muted">Review and confirm the book details</p>
+                        <h2 class="fw-bold">Edit Book</h2>
+                        <p class="text-muted">Update the book details</p>
                     </div>
 
                     <!-- Main Card -->
                     <div class="card shadow-sm">
                         <div class="card-body p-4">
-                            <form action="/add/<%= book.id %>" method="post">
+                            <form action="/edit/<%= book.id %>" method="post">
                                 <div class="row">
                                     <!-- Book Cover -->
                                     <div class="col-md-4 text-center mb-4">
@@ -59,7 +59,9 @@
 
                                         <!-- Buttons -->
                                         <div class="d-flex gap-2">
-                                            <button type="submit" class="btn btn-primary px-4">Add Book</button>
+                                            <button type="submit" class="btn btn-primary px-4">Update Book</button>
+                                            <button type="submit" formaction="/delete/<%= book.id %>" 
+                                                    class="btn btn-danger px-4">Delete</button>
                                             <a href="/" class="btn btn-outline-secondary">Cancel</a>
                                         </div>
                                     </div>
