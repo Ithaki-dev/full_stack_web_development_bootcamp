@@ -39,6 +39,34 @@ class Book {
     this.cover = cover;
   }
 }
+
+// Function to clean HTML tags from text
+function cleanHtmlText(htmlText) {
+  if (!htmlText) return "No description available";
+  
+  // Remove HTML tags
+  let cleanText = htmlText.replace(/<[^>]*>/g, '');
+  
+  // Decode HTML entities
+  cleanText = cleanText
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&nbsp;/g, ' ');
+  
+  // Trim whitespace and limit length
+  cleanText = cleanText.trim();
+  
+  // Limit to 500 characters for better display
+  if (cleanText.length > 500) {
+    cleanText = cleanText.substring(0, 500) + '...';
+  }
+  
+  return cleanText || "No description available";
+}
+
 // Search for books in google books API
 function searchBooks(query) {
   const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}`;
@@ -50,7 +78,7 @@ function searchBooks(query) {
           id: item.id,
           title: item.volumeInfo.title,
           author: item.volumeInfo.authors ? item.volumeInfo.authors.join(", ") : "Unknown",
-          description: item.volumeInfo.description || "No description available",
+          description: cleanHtmlText(item.volumeInfo.description),
           cover: item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail : "./img/no_cover.png"
         }));
       }
@@ -63,7 +91,7 @@ function searchBooks(query) {
 }
 
 function getBooks(callback) {
-  db.query("SELECT * FROM books", (err, res) => {
+  db.query("SELECT * FROM books ORDER BY id DESC", (err, res) => {
     if (err) {
       return callback(err);
     }
@@ -98,7 +126,7 @@ app.get("/add/:id", async (req, res) => {
         id: response.data.id,
         title: response.data.volumeInfo.title,
         author: response.data.volumeInfo.authors ? response.data.volumeInfo.authors.join(", ") : "Unknown",
-        description: response.data.volumeInfo.description || "No description available",
+        description: cleanHtmlText(response.data.volumeInfo.description),
         cover: response.data.volumeInfo.imageLinks ? response.data.volumeInfo.imageLinks.thumbnail : "./img/no_cover.png"
       };
       
