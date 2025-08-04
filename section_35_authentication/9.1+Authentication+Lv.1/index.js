@@ -80,26 +80,34 @@ app.post("/register", async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-
   const email = req.body.username;
   const password = req.body.password;
   try {
-    const result = await db.query(
-      "SELECT * FROM users WHERE email = $1 AND password = $2",
-      [email, password]
-    );
-    if (result.rows.length > 0) {
-      console.log("User logged in successfully");
-      res.redirect("/secrets");
+    const user = await db.query("SELECT * FROM users WHERE email = $1", [
+      email,
+    ]);
+    if (user.rows.length > 0) {
+      const isValidPassword = await bycrypt.compare(
+        password,
+        user.rows[0].password
+      );
+      if (isValidPassword) {
+        console.log("Login successful");
+        res.redirect("/secrets");
+      } else {
+        console.log("Invalid password");
+        res.redirect("/login");
+      }
     } else {
-      console.log("Invalid credentials");
-      res.redirect("/login");
+      console.log("User not found");
+      res.redirect("/register");
     }
-  } catch (error) {
-    console.error("Error logging in user:", error);
-    res.status(500).send("Error logging in user");
+  } catch (err) {
+    console.log(err);
   }
 });
+
+
 
 app.get("/secrets", async (req, res) => {
   res.render("secrets.ejs");
