@@ -1,9 +1,11 @@
 import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
+import bycrypt from "bcrypt";
 
 const app = express();
 const port = 3000;
+const saltRounds = 10;
 
 const db = new pg.Client({
   user: "postgres",
@@ -55,13 +57,22 @@ app.post("/register", async (req, res) => {
       console.log("User already exists");
       res.redirect("/register");
     } else {
-      await db.query(
-        "INSERT INTO users (email, password) VALUES ($1, $2)",
-        [email, password]
-      );
-      console.log("User registered successfully");
-      res.redirect("/login");
+      // Hash the password before storing it
+      bycrypt.hash(password, saltRounds, async (err, hash) => {
+        if (err) {
+          console.error("Error hashing password:", err);
+          res.status(500).send("Error registering user");
+          return;
+        }
+        await db.query(
+          "INSERT INTO users (email, password) VALUES ($1, $2)",
+          [email, hash]
+        );
+        console.log("User registered successfully");
+        res.redirect("/");
+      });
     }
+  
   } catch (error) {
     console.error("Error registering user:", error);
     res.status(500).send("Error registering user");
@@ -95,5 +106,5 @@ app.get("/secrets", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log('Server running on http://localhost:' + port) ;
 });
